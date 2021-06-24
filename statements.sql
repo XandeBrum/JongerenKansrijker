@@ -1,11 +1,11 @@
-CREATE DATABASE jongerekansrijker;
+CREATE DATABASE jongerenkansrijker;
 
-USE jongerekansrijker
+USE jongerenkansrijker;
 
 CREATE TABLE activiteit(
 	activiteitcode INT NOT NULL AUTO_INCREMENT,
 	activiteit VARCHAR(255) NOT NULL,
-	PRIMARY KEY (activiteit)
+	PRIMARY KEY (activiteitcode)
 );
 
 
@@ -29,17 +29,17 @@ CREATE TABLE jongere(
 
 CREATE TABLE jongereinstituut(
 	jongereinstituutcode INT NOT NULL AUTO_INCREMENT,
-	jongerecode INT NOT NULL AUTO_INCREMENT,
-	instituutscode INT NOT NULL AUTO_INCREMENT,
+	jongerecode INT NOT NULL,
+	instituutcode INT NOT NULL,
 	startdatum DATE NOT NULL,
 	PRIMARY KEY (jongereinstituutcode),
 	FOREIGN KEY (jongerecode) REFERENCES jongere(jongerecode),
-	FOREIGN KEY (instituutscode) REFERENCES instituut(instituutscode)
+	FOREIGN KEY (instituutcode) REFERENCES instituut(instituutcode)
 );
 
 
 CREATE TABLE jongereactiviteit(
-	jongereactiviteitcode INT NOT UNLL AUTO_INCREMENT,
+	jongereactiviteitcode INT NOT NULL AUTO_INCREMENT,
 	jongerecode INT NOT NULL,
 	activiteitcode INT NOT NULL,
 	startdatum DATE NOT NULL,

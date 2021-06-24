@@ -1,44 +1,57 @@
+CREATE DATABASE jongerekansrijker;
+
 USE jongerekansrijker
 
 CREATE TABLE activiteit(
-	activiteitcode VARCHAR(3),
-	activiteit VARCHAR(40),
-	PRIMARY KEY (activiteitcode)
+	activiteitcode INT NOT NULL AUTO_INCREMENT,
+	activiteit VARCHAR(255) NOT NULL,
+	PRIMARY KEY (activiteit)
 );
 
 
 CREATE TABLE instituut(
-	instituutscode VARCHAR(5),
-	instituut VARCHAR(40),
-	instituuttelefoon VARCHAR(11),
-	PRIMARY KEY (instituutscode)
+	instituutcode INT NOT NULL AUTO_INCREMENT,
+	instituut VARCHAR(255) NOT NULL,
+	instituuttelefoon VARCHAR(255),
+	PRIMARY KEY (instituutcode)
 );
 
 CREATE TABLE jongere(
-	jongerecode VARCHAR(5),
-	roepnaam VARCHAR(20),
-	tussenvoegsel VARCHAR (7),
-	achternaam VARCHAR (25),
-	inschrijf DATE,
+	jongerecode INT NOT NULL AUTO_INCREMENT,
+	roepnaam VARCHAR(255) NOT NULL, 
+	tussenvoegsel VARCHAR (255),
+	achternaam VARCHAR (255) NOT NULL,
+	inschrijfdatum DATE NOT NULL,
 	PRIMARY KEY (jongerecode)
 );
 
 
 
 CREATE TABLE jongereinstituut(
-	jongerecode VARCHAR(5),
-	instituutscode VARCHAR(5),
-	startdatum DATE,
+	jongereinstituutcode INT NOT NULL AUTO_INCREMENT,
+	jongerecode INT NOT NULL AUTO_INCREMENT,
+	instituutscode INT NOT NULL AUTO_INCREMENT,
+	startdatum DATE NOT NULL,
+	PRIMARY KEY (jongereinstituutcode),
 	FOREIGN KEY (jongerecode) REFERENCES jongere(jongerecode),
 	FOREIGN KEY (instituutscode) REFERENCES instituut(instituutscode)
 );
 
 
 CREATE TABLE jongereactiviteit(
-	jongerecode VARCHAR (5),
-	activiteitcode VARCHAR (3),
-	startdatum DATE,
-	afgerond TINYINT (1),
+	jongereactiviteitcode INT NOT UNLL AUTO_INCREMENT,
+	jongerecode INT NOT NULL,
+	activiteitcode INT NOT NULL,
+	startdatum DATE NOT NULL,
+	afgerond TINYINT,
+	PRIMARY KEY (jongereactiviteitcode),
 	FOREIGN KEY (jongerecode) REFERENCES jongere(jongerecode),
 	FOREIGN KEY (activiteitcode) REFERENCES activiteit(activiteitcode)
+);
+
+CREATE TABLE medewerker(
+	medewerkercode INT NOT NULL AUTO_INCREMENT,
+	username VARCHAR(255) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL,
+	PRIMARY KEY (medewerkercode)
 );
